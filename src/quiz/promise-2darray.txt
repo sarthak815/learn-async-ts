@@ -1,4 +1,42 @@
 - Extract the code in the setTimeout function and replace the setTimeout function  with the extracted code. Then run the main script. 
 - Is there a difference in the flow of execution from when the code was in the setTimeout function?
+With setTimeout:
+    - Sum called
+    - returning from sum logged
+    - Promise is created and returned
+    - The actual summing operation in setTimeout is scheduled for next
+    event loop cycle
+    - The empty sum is executed as per order
+    - Now it moves to next event loop cycle to perform the actual summing
+
+After extraction:
+    - Sum called
+    - Summing operation is performed synchronously rather than next
+    event loop cycle
+    - Additions are logged
+    - Promise is returned to sumPromise1
+    - Promise is executed and returned to sumPromise2
+
+As we can see from the order of execution, when the code was in the 
+setTimeout(), it executed asynchronously in the next event loop
+cycle hence sumPromise1 was displayed after sumPromise2
+
+sumPromise2 executed directly without waiting for the next event loop 
+cycle as it returned the promise before even encountering the setTimeout() call.
+
 - Is the flow of execution in both these examples different from the flow of execution with the examples using the fetch() API, which also returns a promise? 
+Yes
 - If yes, explain the code execution difference. Add your explanation to this file.
+
+The flow of execution in case of the fetch() API is different from the flow
+of execution above. When fetch() is called on a URL it immediately returns
+a promise. However, it continues to asynchronously start an http request. 
+The promise returned in this case is a Promise of an asynchronous network 
+operation and not the actual response. The program continues to execute
+synchronously only once the http response is received, the promise gets 
+resolved/rejected and then/catch calls continue to execute.
+
+In the case of sum2DArray, with the setTimeout() part of the code
+extracted out, it executes synchronously in order. The program doesn't
+move forward until the promise is resolved/rejected.
+
