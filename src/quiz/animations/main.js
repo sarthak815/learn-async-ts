@@ -56,58 +56,50 @@ var aliceTiming1 = {
 var alice10 = document.querySelector("#alice1");
 var alice20 = document.querySelector("#alice2");
 var alice30 = document.querySelector("#alice3");
-// if(alice10 && alice20 && alice30) {
-//   // Promise chain  
-//   alice10.animate(aliceTumbling1, aliceTiming1).finished  
-//     .then(() => {
-//         return alice20
-//                 .animate(aliceTumbling1, aliceTiming1)
-//                 .finished;     
-//     })
-//     .then(() => {
-//       return alice30
-//               .animate(aliceTumbling1, aliceTiming1)
-//               .finished;
-//     })
-//     .catch((err) => alert(`Error when promising ... ${err.message}`));
-// }
-// else{
-//   console.warn("#alice not found");
-// }
 function animateAlice() {
     return __awaiter(this, void 0, void 0, function () {
         var err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    if (!(alice10 && alice20 && alice30)) return [3 /*break*/, 7];
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 5, , 6]);
+                    _a.trys.push([0, 10, , 11]);
+                    if (!alice10) return [3 /*break*/, 2];
                     return [4 /*yield*/, alice10.animate(aliceTumbling1, aliceTiming1).finished];
+                case 1:
+                    _a.sent();
+                    return [3 /*break*/, 3];
                 case 2:
-                    _a.sent();
-                    return [4 /*yield*/, alice20.animate(aliceTumbling1, aliceTiming1).finished];
+                    console.warn("#alice1 not found");
+                    _a.label = 3;
                 case 3:
-                    _a.sent();
-                    return [4 /*yield*/, alice30.animate(aliceTumbling1, aliceTiming1).finished];
+                    if (!alice20) return [3 /*break*/, 5];
+                    return [4 /*yield*/, alice20.animate(aliceTumbling1, aliceTiming1).finished];
                 case 4:
                     _a.sent();
                     return [3 /*break*/, 6];
                 case 5:
+                    console.warn("#alice2 not found");
+                    _a.label = 6;
+                case 6:
+                    if (!alice30) return [3 /*break*/, 8];
+                    return [4 /*yield*/, alice30.animate(aliceTumbling1, aliceTiming1).finished];
+                case 7:
+                    _a.sent();
+                    return [3 /*break*/, 9];
+                case 8:
+                    console.warn("#alice3 not found");
+                    _a.label = 9;
+                case 9: return [3 /*break*/, 11];
+                case 10:
                     err_1 = _a.sent();
                     if (err_1 instanceof Error) {
-                        alert("Error when asyncing ... ".concat(err_1.message));
+                        alert("Error when promising ... ".concat(err_1.message));
                     }
                     else {
-                        alert('Unknown error occurred');
+                        alert('An unknown error occurred.');
                     }
-                    return [3 /*break*/, 6];
-                case 6: return [3 /*break*/, 8];
-                case 7:
-                    console.warn("#alice not found");
-                    _a.label = 8;
-                case 8: return [2 /*return*/];
+                    return [3 /*break*/, 11];
+                case 11: return [2 /*return*/];
             }
         });
     });
