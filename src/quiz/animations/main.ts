@@ -1,5 +1,3 @@
-// The Promise.all function in src / quiz / promise - sum - 2d - array.ts looks complicated.Simplify
-// it using async await.
 // • In src / quiz / animation / main.ts, we are animating three images alice1, alice2, alice3.They
 // must be animated one after the other, that is, alice2 must begin animation after alice1
 // has completed and so on.
@@ -26,36 +24,41 @@ const alice10 = document.querySelector<HTMLElement>("#alice1");
 const alice20 = document.querySelector<HTMLElement>("#alice2");
 const alice30 = document.querySelector<HTMLElement>("#alice3");
 
-if(alice10 && alice20 && alice30) {
-  // Promise chain  
-  alice10.animate(aliceTumbling1, aliceTiming1).finished  
-    .then(() => {
-        return alice20
-                .animate(aliceTumbling1, aliceTiming1)
-                .finished;     
-    })
-    .then(() => {
-      return alice30
-              .animate(aliceTumbling1, aliceTiming1)
-              .finished;
-    })
-    .catch((err) => alert(`Error when promising ... ${err.message}`));
-}
-else{
-  console.warn("#alice not found");
+// if(alice10 && alice20 && alice30) {
+//   // Promise chain  
+//   alice10.animate(aliceTumbling1, aliceTiming1).finished  
+//     .then(() => {
+//         return alice20
+//                 .animate(aliceTumbling1, aliceTiming1)
+//                 .finished;     
+//     })
+//     .then(() => {
+//       return alice30
+//               .animate(aliceTumbling1, aliceTiming1)
+//               .finished;
+//     })
+//     .catch((err) => alert(`Error when promising ... ${err.message}`));
+// }
+// else{
+//   console.warn("#alice not found");
+// }
+
+async function animateAlice() {
+  if (alice10 && alice20 && alice30) {
+    try {
+      await alice10.animate(aliceTumbling1, aliceTiming1).finished;
+      await alice20.animate(aliceTumbling1, aliceTiming1).finished;
+      await alice30.animate(aliceTumbling1, aliceTiming1).finished;
+    } catch (err) {
+      if (err instanceof Error) {
+        alert(`Error when asyncing ... ${err.message}`);
+      } else {
+        alert('Unknown error occurred');
+      }
+    }
+  } else {
+    console.warn("#alice not found");
+  }
 }
 
-// alice10
-//     .animate(aliceTumbling1, aliceTiming1)
-//     .finished
-//     .then((res) => {
-//         console.log(res);
-//         alice20
-//             .animate(aliceTumbling1, aliceTiming1)
-//             .finished
-//             .then((res) => {
-//                 console.log(res);
-//                 alice30.animate(aliceTumbling1, aliceTiming1);
-//             })
-//     });
-  
+animateAlice();
