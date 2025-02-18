@@ -31,7 +31,6 @@ for (let i = 0; i < array2D_3.length; i++) {
     rowNegPromises.push(hasNegative(array2D_3, i));
 }
 
-//I want to use promise.any
 Promise.any(rowNegPromises)
     .then((res) => console.log('Row with negative number:', res))
     .catch((err) => console.log('No row with negative number:', err));
