@@ -45,8 +45,8 @@ const array2D_1 = [
 
 calculateSum(array2D_1)
     .then((res) => console.log('calculateSum:', res))
-    .catch((err) => console.log('calculateSum:', err));
+    .catch((err) => console.log('Error::', err));
 
 calculateSum([])
     .then((res) => console.log('calculateSum:', res))
-    .catch((err) => console.log('calculateSum:', err));
+    .catch((err) => console.log('Error:', err));
